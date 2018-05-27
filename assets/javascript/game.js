@@ -5,6 +5,33 @@ var objScoreKeeper = {
     emerald: 0,
     sapphire: 0,
     diamond: 0,
+};
+
+var gameHTML = `
+    <button id="ruby" class="button" value="`+ objScoreKeeper.ruby +`">
+        Ruby
+    </button>
+    
+    <button id="sapphire" class="button" value="`+ objScoreKeeper.sapphire +`">
+        Sapphire
+    </button>
+    
+    <button id="emerald" class="button" value="3">
+        Emerald
+    </button>
+    
+    <button id="diamond" class="button" value="4">
+        Diamond
+    </button>
+    `;
+
+    objScoreKeeper = {
+    playerScore: 0,
+    targetScore:  0,
+    ruby: 0,
+    emerald: 0,
+    sapphire: 0,
+    diamond: 0,
     startGame: function() {
         //playerScore is reset at game start
         this.playerScore = 0;
@@ -23,23 +50,31 @@ var objScoreKeeper = {
         console.log(this.emerald);
         console.log(objScoreKeeper.diamond);
         
-        //set event listeners for gem clicks
-        $("#ruby").on("click", objScoreKeeper.addPoints);
-        $("#sapphire").on("click", objScoreKeeper.addPoints);
-        $("#emerald").on("click", objScoreKeeper.addPoints);
-        $("#diamond").on("click", objScoreKeeper.addPoints);
+        //display game content
+        $("#game").html(gameHTML);
+        console.log(this.addPoints);
+        
+        //++!!!
+        //The html to which a listener applies must already exist before you try to assign it
+        //--!!!
+        //set event listener for gem clicks
+        
+        $(".button").on("click", objScoreKeeper.addPoints);
+
+
         
     },
     
     addPoints: function(){
+        console.log("hello");
+        if (this.id == "ruby") {
+            objScoreKeeper.ruby += $(this).val(); //getting treated like a string
+            console.log(objScoreKeeper.ruby);
         
-        if (this.id = "ruby") {
-            console.log("hi ruby");
-        
-        } else if (this.id = "sapphire") {
+        } else if (this.id == "sapphire") {
                 console.log("hi sapphy");
 
-        } else if (this.id = "emerald") {
+        } else if (this.id == "emerald") {
                 console.log("hi emmy");
 
         } else {
@@ -54,3 +89,9 @@ var objScoreKeeper = {
 };
 
 $(document).ready(objScoreKeeper.startGame);
+
+// //the game executes below
+// $(document).ready(function() {
+//     $("#game").html(gameHTML);
+
+// });
